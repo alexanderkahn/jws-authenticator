@@ -4,7 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import net.alexanderkahn.service.commons.firebaseauth.jws.JwsAuthentication
 import net.alexanderkahn.service.commons.firebaseauth.jws.filter.config.UnauthenticatedPath
 import net.alexanderkahn.service.commons.model.exception.UnauthenticatedException
-import net.alexanderkahn.service.commons.model.response.body.ErrorResponseModel
+import net.alexanderkahn.service.commons.model.response.body.ErrorResponse
 import net.alexanderkahn.service.commons.model.response.body.error.ResponseError
 import net.alexanderkahn.service.commons.model.response.body.meta.ResponseMeta
 import net.alexanderkahn.service.commons.model.response.body.meta.ResponseStatus
@@ -39,7 +39,7 @@ open class JwsAuthenticationFilter(
             filterChain.doFilter(request, response)
         } catch (exception: Exception) {
             val status = ResponseStatus.UNAUTHORIZED
-            val payload = ErrorResponseModel(ResponseMeta(status), ResponseError(UnauthenticatedException(exception.message.orEmpty())))
+            val payload = ErrorResponse(ResponseMeta(status), ResponseError(UnauthenticatedException(exception.message.orEmpty())))
             (response as? HttpServletResponse)?.apply {
                 setStatus(status.statusCode)
                 contentType = "application/json"
