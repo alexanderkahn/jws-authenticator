@@ -6,7 +6,7 @@ import net.alexanderkahn.service.commons.firebaseauth.jws.filter.config.Unauthen
 import net.alexanderkahn.service.commons.model.exception.UnauthenticatedException
 import net.alexanderkahn.service.commons.model.response.body.ErrorResponse
 import net.alexanderkahn.service.commons.model.response.body.error.ResponseError
-import net.alexanderkahn.service.commons.model.response.body.meta.ResponseMeta
+import net.alexanderkahn.service.commons.model.response.body.meta.ObjectResponseMeta
 import net.alexanderkahn.service.commons.model.response.body.meta.ResponseStatus
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpMethod
@@ -39,7 +39,7 @@ open class JwsAuthenticationFilter(
             filterChain.doFilter(request, response)
         } catch (exception: Exception) {
             val status = ResponseStatus.UNAUTHORIZED
-            val payload = ErrorResponse(ResponseMeta(status), ResponseError(UnauthenticatedException(exception.message.orEmpty())))
+            val payload = ErrorResponse(ObjectResponseMeta(status), ResponseError(UnauthenticatedException(exception.message.orEmpty())))
             (response as? HttpServletResponse)?.apply {
                 setStatus(status.statusCode)
                 contentType = "application/json"
