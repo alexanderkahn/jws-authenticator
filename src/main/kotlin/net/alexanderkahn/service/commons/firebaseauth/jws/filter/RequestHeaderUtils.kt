@@ -3,8 +3,8 @@ package net.alexanderkahn.service.commons.firebaseauth.jws.filter
 import net.alexanderkahn.service.commons.model.exception.UnauthenticatedException
 import javax.servlet.http.HttpServletRequest
 
-private val TOKEN_HEADER_NAME = "Authorization"
-private val TOKEN_HEADER_PREFIX = "Bearer "
+private const val TOKEN_HEADER_NAME = "Authorization"
+private const val TOKEN_HEADER_PREFIX = "Bearer "
 
 fun HttpServletRequest.getBearerToken(): String {
     val authHeader = this.getHeader(TOKEN_HEADER_NAME)
