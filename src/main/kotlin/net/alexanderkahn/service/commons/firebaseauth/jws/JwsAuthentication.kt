@@ -1,6 +1,5 @@
 package net.alexanderkahn.service.commons.firebaseauth.jws
 
-import net.alexanderkahn.service.commons.model.exception.NotImplementedException
 import org.springframework.security.core.Authentication
 import org.springframework.security.core.GrantedAuthority
 
@@ -22,7 +21,7 @@ class JwsAuthentication(
     }
 
     override fun getCredentials(): Any {
-        throw NotImplementedException()
+        throw NotImplementedError()
     }
 
     override fun getDetails(): JwsUserDetails {
@@ -30,7 +29,7 @@ class JwsAuthentication(
     }
 
     override fun getAuthorities(): MutableCollection<out GrantedAuthority> {
-        throw NotImplementedException()
+        throw NotImplementedError()
     }
 
     override fun getPrincipal(): JwsCredentials {

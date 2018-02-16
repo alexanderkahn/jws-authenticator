@@ -1,8 +1,8 @@
 package net.alexanderkahn.service.commons.firebaseauth.jws.filter
 
 
+import net.alexanderkahn.service.commons.firebaseauth.jws.UnableToVerifyJwsTokenException
 import net.alexanderkahn.service.commons.firebaseauth.jws.filter.config.FirebaseJwsConfig
-import net.alexanderkahn.service.commons.model.exception.InvalidStateException
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Component
 
@@ -14,7 +14,7 @@ class JwsParserFactory(private val jwsIssuer: FirebaseJwsConfig.JwsIssuerConfig)
     //TODO: this could all be much simpler with some verification on the jwsIssuer object
     val tokenParser: ExtendedJwsParser by lazy {
         if (jwsIssuer.keystore.url.isEmpty()) {
-            throw InvalidStateException("Unable to process tokens: no keystoreUrl configured")
+            throw UnableToVerifyJwsTokenException("Unable to process tokens: no keystoreUrl configured")
         }
         val parser = ExtendedJwsParser(RemoteKeyResolver(JwsKeyClient(jwsIssuer.keystore.url)), jwsIssuer.algorithm)
 

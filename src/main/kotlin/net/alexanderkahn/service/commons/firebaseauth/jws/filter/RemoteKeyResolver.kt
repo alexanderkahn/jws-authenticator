@@ -5,8 +5,7 @@ import com.google.gson.reflect.TypeToken
 import io.jsonwebtoken.Claims
 import io.jsonwebtoken.JwsHeader
 import io.jsonwebtoken.SigningKeyResolver
-import net.alexanderkahn.service.commons.model.exception.NotImplementedException
-import net.alexanderkahn.service.commons.model.exception.UnauthenticatedException
+import net.alexanderkahn.service.commons.firebaseauth.jws.UnableToVerifyJwsTokenException
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpHeaders
 import java.io.ByteArrayInputStream
@@ -30,14 +29,14 @@ class RemoteKeyResolver(private val keyClient: JwsKeyClient) : SigningKeyResolve
     private var cachedKeys = CachedKeys()
 
     override fun resolveSigningKey(header: JwsHeader<out JwsHeader<*>>?, claims: Claims?): Key {
-        header ?: throw UnauthenticatedException("Unable to read token header")
+        header ?: throw UnableToVerifyJwsTokenException("Unable to read token header")
         val headerKeyId: String = header.getKeyId()
         val publicKey = getRemoteKeys()[headerKeyId]
-        return publicKey ?: throw UnauthenticatedException("Unable to authenticate token signing key")
+        return publicKey ?: throw UnableToVerifyJwsTokenException("Unable to authenticate token signing key")
     }
 
     override fun resolveSigningKey(header: JwsHeader<out JwsHeader<*>>?, plaintext: String?): Key {
-        throw NotImplementedException()
+        throw NotImplementedError()
     }
 
     private fun getRemoteKeys(): Map<String, PublicKey> {

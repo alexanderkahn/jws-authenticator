@@ -4,7 +4,7 @@ import io.jsonwebtoken.Claims
 import io.jsonwebtoken.Jws
 import io.jsonwebtoken.SigningKeyResolver
 import io.jsonwebtoken.impl.DefaultJwtParser
-import net.alexanderkahn.service.commons.model.exception.UnauthenticatedException
+import net.alexanderkahn.service.commons.firebaseauth.jws.InvalidJwsTokenException
 
 class ExtendedJwsParser(signingKeyResolver: SigningKeyResolver, private val algorithm: String) : DefaultJwtParser() {
     init {
@@ -19,7 +19,7 @@ class ExtendedJwsParser(signingKeyResolver: SigningKeyResolver, private val algo
 
     private fun verifyClaims(parsed: Jws<Claims>) {
         if (parsed.header.getAlgorithm() != algorithm) {
-            throw UnauthenticatedException("JWT token contained invalid signing algorithm")
+            throw InvalidJwsTokenException("JWT token contained invalid signing algorithm")
         }
     }
 }
