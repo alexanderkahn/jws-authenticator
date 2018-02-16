@@ -1,4 +1,4 @@
-package net.alexanderkahn.service.commons.firebaseauth.jws.filter
+package net.alexanderkahn.service.commons.jwsauthenticator.jws.filter
 
 import org.springframework.http.ResponseEntity
 import org.springframework.web.client.RestTemplate

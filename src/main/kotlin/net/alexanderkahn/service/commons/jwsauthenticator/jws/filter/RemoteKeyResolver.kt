@@ -1,11 +1,11 @@
-package net.alexanderkahn.service.commons.firebaseauth.jws.filter
+package net.alexanderkahn.service.commons.jwsauthenticator.jws.filter
 
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import io.jsonwebtoken.Claims
 import io.jsonwebtoken.JwsHeader
 import io.jsonwebtoken.SigningKeyResolver
-import net.alexanderkahn.service.commons.firebaseauth.jws.UnableToVerifyJwsTokenException
+import net.alexanderkahn.service.commons.jwsauthenticator.jws.UnableToVerifyJwsTokenException
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpHeaders
 import java.io.ByteArrayInputStream

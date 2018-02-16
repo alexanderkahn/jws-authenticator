@@ -1,7 +1,7 @@
-package net.alexanderkahn.service.commons.firebaseauth.jws.filter
+package net.alexanderkahn.service.commons.jwsauthenticator.jws.filter
 
-import net.alexanderkahn.service.commons.firebaseauth.jws.JwsAuthentication
-import net.alexanderkahn.service.commons.firebaseauth.jws.filter.config.FirebaseJwsConfig
+import net.alexanderkahn.service.commons.jwsauthenticator.jws.JwsAuthentication
+import net.alexanderkahn.service.commons.jwsauthenticator.jws.filter.config.JwsConfig
 import org.springframework.http.HttpMethod
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.web.filter.GenericFilterBean
@@ -10,7 +10,7 @@ import javax.servlet.ServletRequest
 import javax.servlet.ServletResponse
 import javax.servlet.http.HttpServletRequest
 
-class JwsAuthenticationFilter(private val responseWriter: ExceptionResponseWriter, config: FirebaseJwsConfig) : GenericFilterBean() {
+class JwsAuthenticationFilter(private val responseWriter: ExceptionResponseWriter, config: JwsConfig) : GenericFilterBean() {
 
     private val unauthenticatedPathPatterns: Collection<Regex>
 

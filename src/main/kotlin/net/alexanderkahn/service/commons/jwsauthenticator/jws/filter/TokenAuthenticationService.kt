@@ -1,13 +1,13 @@
-package net.alexanderkahn.service.commons.firebaseauth.jws.filter
+package net.alexanderkahn.service.commons.jwsauthenticator.jws.filter
 
 import io.jsonwebtoken.Claims
-import net.alexanderkahn.service.commons.firebaseauth.jws.JwsAuthentication
-import net.alexanderkahn.service.commons.firebaseauth.jws.JwsCredentials
-import net.alexanderkahn.service.commons.firebaseauth.jws.JwsUserDetails
-import net.alexanderkahn.service.commons.firebaseauth.jws.filter.config.FirebaseJwsConfig
+import net.alexanderkahn.service.commons.jwsauthenticator.jws.JwsAuthentication
+import net.alexanderkahn.service.commons.jwsauthenticator.jws.JwsCredentials
+import net.alexanderkahn.service.commons.jwsauthenticator.jws.JwsUserDetails
+import net.alexanderkahn.service.commons.jwsauthenticator.jws.filter.config.JwsConfig
 import javax.servlet.http.HttpServletRequest
 
-class TokenAuthenticationService(jwsIssuer: FirebaseJwsConfig.JwsIssuerConfig) {
+class TokenAuthenticationService(jwsIssuer: JwsConfig.JwsIssuerConfig) {
 
     private val parser = JwsParserFactory(jwsIssuer).tokenParser
 

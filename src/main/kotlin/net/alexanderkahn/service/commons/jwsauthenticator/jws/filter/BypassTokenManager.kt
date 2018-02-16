@@ -1,13 +1,13 @@
-package net.alexanderkahn.service.commons.firebaseauth.jws.filter
+package net.alexanderkahn.service.commons.jwsauthenticator.jws.filter
 
-import net.alexanderkahn.service.commons.firebaseauth.jws.InvalidJwsTokenException
-import net.alexanderkahn.service.commons.firebaseauth.jws.JwsAuthentication
-import net.alexanderkahn.service.commons.firebaseauth.jws.JwsCredentials
-import net.alexanderkahn.service.commons.firebaseauth.jws.JwsUserDetails
-import net.alexanderkahn.service.commons.firebaseauth.jws.filter.config.FirebaseJwsConfig
+import net.alexanderkahn.service.commons.jwsauthenticator.jws.InvalidJwsTokenException
+import net.alexanderkahn.service.commons.jwsauthenticator.jws.JwsAuthentication
+import net.alexanderkahn.service.commons.jwsauthenticator.jws.JwsCredentials
+import net.alexanderkahn.service.commons.jwsauthenticator.jws.JwsUserDetails
+import net.alexanderkahn.service.commons.jwsauthenticator.jws.filter.config.JwsConfig
 import javax.servlet.http.HttpServletRequest
 
-open class BypassTokenManager(private val config: FirebaseJwsConfig.BypassTokenConfig?) {
+open class BypassTokenManager(private val config: JwsConfig.BypassTokenConfig?) {
 
     fun isUsingBypassToken(request: HttpServletRequest): Boolean {
         return config != null && !config.token.isEmpty() && request.getBearerToken() == config.token

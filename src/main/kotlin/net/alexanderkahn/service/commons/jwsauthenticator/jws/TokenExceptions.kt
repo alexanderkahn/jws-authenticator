@@ -1,4 +1,4 @@
-package net.alexanderkahn.service.commons.firebaseauth.jws
+package net.alexanderkahn.service.commons.jwsauthenticator.jws
 
 class InvalidJwsTokenException(message: String) : Exception(message)
 

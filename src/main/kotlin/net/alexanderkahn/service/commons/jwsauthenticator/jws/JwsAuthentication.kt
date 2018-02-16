@@ -1,4 +1,4 @@
-package net.alexanderkahn.service.commons.firebaseauth.jws
+package net.alexanderkahn.service.commons.jwsauthenticator.jws
 
 import org.springframework.security.core.Authentication
 import org.springframework.security.core.GrantedAuthority

@@ -1,10 +1,10 @@
-package net.alexanderkahn.service.commons.firebaseauth.jws.filter
+package net.alexanderkahn.service.commons.jwsauthenticator.jws.filter
 
 import io.jsonwebtoken.Claims
 import io.jsonwebtoken.Jws
 import io.jsonwebtoken.SigningKeyResolver
 import io.jsonwebtoken.impl.DefaultJwtParser
-import net.alexanderkahn.service.commons.firebaseauth.jws.InvalidJwsTokenException
+import net.alexanderkahn.service.commons.jwsauthenticator.jws.InvalidJwsTokenException
 
 class ExtendedJwsParser(signingKeyResolver: SigningKeyResolver, private val algorithm: String) : DefaultJwtParser() {
     init {

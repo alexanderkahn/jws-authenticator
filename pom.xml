@@ -5,12 +5,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>net.alexanderkahn.service.commons</groupId>
-    <artifactId>firebase-jws</artifactId>
+    <artifactId>jws-authenticator</artifactId>
     <version>0.0.14</version>
 
     <scm>
-        <url>https://gitlab.com/alexanderkahn/firebase-jws</url>
-        <developerConnection>scm:git:git@gitlab.com:alexanderkahn/firebase-jws.git</developerConnection>
+        <url>https://gitlab.com/alexanderkahn/jws-authenticator</url>
+        <developerConnection>scm:git:git@gitlab.com:alexanderkahn/jws-authenticator.git</developerConnection>
     </scm>
 
     <repositories>

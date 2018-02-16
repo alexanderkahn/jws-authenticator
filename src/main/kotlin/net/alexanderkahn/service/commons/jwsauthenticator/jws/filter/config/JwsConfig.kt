@@ -1,6 +1,6 @@
-package net.alexanderkahn.service.commons.firebaseauth.jws.filter.config
+package net.alexanderkahn.service.commons.jwsauthenticator.jws.filter.config
 
-interface FirebaseJwsConfig {
+interface JwsConfig {
 
     val issuer: JwsIssuerConfig
     val unauthenticatedPaths: MutableCollection<String>

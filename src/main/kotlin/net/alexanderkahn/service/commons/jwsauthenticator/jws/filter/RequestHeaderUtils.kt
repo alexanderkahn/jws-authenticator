@@ -1,6 +1,6 @@
-package net.alexanderkahn.service.commons.firebaseauth.jws.filter
+package net.alexanderkahn.service.commons.jwsauthenticator.jws.filter
 
-import net.alexanderkahn.service.commons.firebaseauth.jws.InvalidJwsTokenException
+import net.alexanderkahn.service.commons.jwsauthenticator.jws.InvalidJwsTokenException
 import javax.servlet.http.HttpServletRequest
 
 private const val TOKEN_HEADER_NAME = "Authorization"

@@ -1,13 +1,13 @@
-package net.alexanderkahn.service.commons.firebaseauth.jws.filter
+package net.alexanderkahn.service.commons.jwsauthenticator.jws.filter
 
 
-import net.alexanderkahn.service.commons.firebaseauth.jws.UnableToVerifyJwsTokenException
-import net.alexanderkahn.service.commons.firebaseauth.jws.filter.config.FirebaseJwsConfig
+import net.alexanderkahn.service.commons.jwsauthenticator.jws.UnableToVerifyJwsTokenException
+import net.alexanderkahn.service.commons.jwsauthenticator.jws.filter.config.JwsConfig
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Component
 
 @Component
-class JwsParserFactory(private val jwsIssuer: FirebaseJwsConfig.JwsIssuerConfig) {
+class JwsParserFactory(private val jwsIssuer: JwsConfig.JwsIssuerConfig) {
 
     private val logger = LoggerFactory.getLogger(JwsParserFactory::class.java)
 
