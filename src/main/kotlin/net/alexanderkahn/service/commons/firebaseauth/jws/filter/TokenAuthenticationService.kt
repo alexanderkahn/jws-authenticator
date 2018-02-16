@@ -4,16 +4,12 @@ import io.jsonwebtoken.Claims
 import net.alexanderkahn.service.commons.firebaseauth.jws.JwsAuthentication
 import net.alexanderkahn.service.commons.firebaseauth.jws.JwsCredentials
 import net.alexanderkahn.service.commons.firebaseauth.jws.JwsUserDetails
-import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.context.annotation.Configuration
-import org.springframework.stereotype.Component
+import net.alexanderkahn.service.commons.firebaseauth.jws.filter.config.FirebaseJwsConfig
 import javax.servlet.http.HttpServletRequest
 
-@Component
-@Configuration
-open class TokenAuthenticationService(@Autowired jwsParserFactory: JwsParserFactory) {
+class TokenAuthenticationService(jwsIssuer: FirebaseJwsConfig.JwsIssuerConfig) {
 
-    private val parser = jwsParserFactory.tokenParser
+    private val parser = JwsParserFactory(jwsIssuer).tokenParser
 
     fun getUserFromToken(request: HttpServletRequest): JwsAuthentication {
         val tokenString = request.getBearerToken()
