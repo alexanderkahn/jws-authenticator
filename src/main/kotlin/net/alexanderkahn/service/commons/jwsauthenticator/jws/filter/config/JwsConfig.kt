@@ -17,7 +17,6 @@ interface JwsConfig {
         }
 
         interface Claims {
-            //TODO: if I could fit these into an arbitrary claims key-value map that would be tasty
             val audience: String
             val issuer: String
         }

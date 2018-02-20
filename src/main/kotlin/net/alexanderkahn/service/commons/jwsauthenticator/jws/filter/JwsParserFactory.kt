@@ -11,7 +11,6 @@ class JwsParserFactory(private val jwsIssuer: JwsConfig.JwsIssuerConfig) {
 
     private val logger = LoggerFactory.getLogger(JwsParserFactory::class.java)
 
-    //TODO: this could all be much simpler with some verification on the jwsIssuer object
     val tokenParser: ExtendedJwsParser by lazy {
         if (jwsIssuer.keystore.url.isEmpty()) {
             throw UnableToVerifyJwsTokenException("Unable to process tokens: no keystoreUrl configured")

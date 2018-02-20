@@ -25,13 +25,12 @@ class RemoteKeyResolver(private val keyClient: JwsKeyClient) : SigningKeyResolve
     private val certFactory = CertificateFactory.getInstance("X.509")
     private val logger = LoggerFactory.getLogger(RemoteKeyResolver::class.java)
 
-    //TODO: this should be nullable, with no default values. Just don't cache if there's no max-age header.
-    private var cachedKeys = CachedKeys()
+    private var cachedKeys: CachedKeys? = null
 
     override fun resolveSigningKey(header: JwsHeader<out JwsHeader<*>>?, claims: Claims?): Key {
         header ?: throw UnableToVerifyJwsTokenException("Unable to read token header")
         val headerKeyId: String = header.getKeyId()
-        val publicKey = getRemoteKeys()[headerKeyId]
+        val publicKey = getRemoteKeys()?.get(headerKeyId)
         return publicKey ?: throw UnableToVerifyJwsTokenException("Unable to authenticate token signing key")
     }
 
@@ -39,11 +38,11 @@ class RemoteKeyResolver(private val keyClient: JwsKeyClient) : SigningKeyResolve
         throw NotImplementedError()
     }
 
-    private fun getRemoteKeys(): Map<String, PublicKey> {
-        if (OffsetDateTime.now().isAfter(cachedKeys.updateAfter)) {
+    private fun getRemoteKeys(): Map<String, PublicKey>? {
+        if (OffsetDateTime.now().isAfter(cachedKeys?.updateAfter)) {
             updateKeys()
         }
-        return cachedKeys.keyIds
+        return cachedKeys?.keyIds
     }
 
     private fun updateKeys() {
@@ -76,7 +75,7 @@ class RemoteKeyResolver(private val keyClient: JwsKeyClient) : SigningKeyResolve
     }
 
     private data class CachedKeys(
-            val updateAfter: OffsetDateTime = OffsetDateTime.MIN,
-            val keyIds: Map<String, PublicKey> = Collections.emptyMap()
+            val updateAfter: OffsetDateTime,
+            val keyIds: Map<String, PublicKey>
     )
 }
