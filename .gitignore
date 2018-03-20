@@ -9,6 +9,15 @@ dependency-reduced-pom.xml
 buildNumber.properties
 .mvn/timing.properties
 
+### Gradle ###
+.gradle
+/build/
+gradle-app.setting
+.gradletasknamecache
+
+# Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
+!gradle-wrapper.jar
+
 ### STS ###
 .apt_generated
 .classpath
@@ -22,6 +31,7 @@ buildNumber.properties
 *.iws
 *.iml
 *.ipr
+*/out/
 
 ### NetBeans ###
 nbproject/private/
