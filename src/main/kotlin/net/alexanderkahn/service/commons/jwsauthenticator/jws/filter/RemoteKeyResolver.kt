@@ -25,7 +25,11 @@ class RemoteKeyResolver(private val keyClient: JwsKeyClient) : SigningKeyResolve
     private val certFactory = CertificateFactory.getInstance("X.509")
     private val logger = LoggerFactory.getLogger(RemoteKeyResolver::class.java)
 
-    private var cachedKeys: CachedKeys? = null
+    private val cachedKeys = CachedKeys()
+
+    init {
+        updateKeys()
+    }
 
     override fun resolveSigningKey(header: JwsHeader<out JwsHeader<*>>?, claims: Claims?): Key {
         header ?: throw UnableToVerifyJwsTokenException("Unable to read token header")
@@ -39,16 +43,19 @@ class RemoteKeyResolver(private val keyClient: JwsKeyClient) : SigningKeyResolve
     }
 
     private fun getRemoteKeys(): Map<String, PublicKey>? {
-        if (OffsetDateTime.now().isAfter(cachedKeys?.updateAfter)) {
+        if (OffsetDateTime.now().isAfter(cachedKeys.updateAfter)) {
             updateKeys()
         }
-        return cachedKeys?.keyIds
+        return cachedKeys.keyIds
     }
 
     private fun updateKeys() {
         logger.info("Updating JWT public keys")
         val response = keyClient.get()
-        cachedKeys = CachedKeys(updateAfter = getNextRefresh(response.headers), keyIds = convertToKeys(response.body.orEmpty()))
+        with(cachedKeys) {
+            updateAfter = getNextRefresh(response.headers)
+            keyIds = convertToKeys(response.body.orEmpty())
+        }
     }
 
     private fun getNextRefresh(headers: HttpHeaders): OffsetDateTime {
@@ -75,7 +82,7 @@ class RemoteKeyResolver(private val keyClient: JwsKeyClient) : SigningKeyResolve
     }
 
     private data class CachedKeys(
-            val updateAfter: OffsetDateTime,
-            val keyIds: Map<String, PublicKey>
+            var updateAfter: OffsetDateTime = OffsetDateTime.now(),
+            var keyIds: Map<String, PublicKey> = emptyMap()
     )
 }
